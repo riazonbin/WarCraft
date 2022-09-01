@@ -7,15 +7,14 @@ Footman playerTwo = new();
 Thread myThread1 = new Thread(() => playerOne.Attack(playerTwo));
 Thread myThread2 = new Thread(() => playerTwo.Attack(playerOne));
 
-myThread1.Start(playerOne);
 
 try
 {
     while (true)
     {
-        playerOne.Attack(playerTwo);
+        myThread1.Start(playerOne);
         Console.WriteLine($"First player's HP is {playerOne.GetHealth()}");
-        playerTwo.Attack(playerOne);
+        myThread2.Start(playerOne);
         Console.WriteLine($"Second player's HP is {playerTwo.GetHealth()}");
     }
 }
