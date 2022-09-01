@@ -11,7 +11,23 @@ namespace Units
         private int _damage;
         private int _attackSpeed;
         private int _armor;
-        public abstract void Attack(Unit unit);
+
+        public Military(int health, int armor, int attackSpeed, int damage) : base(health)
+        {
+            this._armor = armor;
+            this._attackSpeed = attackSpeed;
+            this._damage = damage;
+        }
+        public void Attack(Unit unit)
+        {
+            unit.SetHealth(unit.GetHealth() - this.GetDamage());
+
+            if (unit.GetHealth() <= 0)
+            {
+                unit.SetStateOfLife(false);
+                throw new Exception("Enemy is destroyed!");
+            }
+        }
 
         public int GetDamage()
         {

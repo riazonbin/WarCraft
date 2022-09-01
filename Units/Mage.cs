@@ -8,6 +8,10 @@ namespace Units
 {
     public class Mage : Range
     {
+        public Mage(): base(60, 0, 8, 12, 100, 4)
+        {
+            this.SetStateOfLife(true);
+        }
         public void FireBall()
         {
 
@@ -21,14 +25,10 @@ namespace Units
 
         }
 
-        public override void Attack(Unit unit)
-        {
-            throw new NotImplementedException();
-        }
 
         public override void Move()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Mage is moving");
         }
     }
 }

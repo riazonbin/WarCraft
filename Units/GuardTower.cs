@@ -8,12 +8,22 @@ namespace Units
 {
     public class GuardTower : Unit
     {
-        private string _range;
-        private string _damage;
-        private string _attackSpeed;
-        public void Attack()
+        private int _range;
+        private int _damage;
+        private int _attackSpeed;
+        public void Attack(Unit unit)
         {
+            if (!unit.GetStateOfLife())
+            {
+                throw new Exception("Enemy is destroyed!");
+            }
 
+            unit.SetHealth(unit.GetHealth() - _damage);
+
+            if (unit.GetHealth() <= 0)
+            {
+                unit.SetStateOfLife(false);
+            }
         }
     }
 }

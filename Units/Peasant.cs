@@ -8,18 +8,22 @@ namespace Units
 {
     public class Peasant : Movable
     {
+        public Peasant(int health) : base(health)
+        {
+            this.SetStateOfLife(true);
+        }
         public void Mining()
         {
-
+            Console.WriteLine("Peasant is mining ore");
         }
         public void Chopping()
         {
-
+            Console.WriteLine("Peasant is chopping woods");
         }
 
         public override void Move()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Peasant is moving");
         }
     }
 }

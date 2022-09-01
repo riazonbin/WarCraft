@@ -8,19 +8,29 @@ namespace Units
 {
     public class Dragon : Range
     {
-        public override void Attack(Unit unit)
+        public Dragon() : base(100, 100, 4, 25, 100, 20)
         {
-            throw new NotImplementedException();
+            this.SetStateOfLife(true);
         }
 
-        public void FireBreath()
+        public void FireBreath(Unit unit)
         {
+            if (!unit.GetStateOfLife())
+            {
+                throw new Exception("Enemy is destroyed!");
+            }
 
+            unit.SetHealth(unit.GetHealth() - 25);
+
+            if (unit.GetHealth() <= 0)
+            {
+                unit.SetStateOfLife(false);
+            }
         }
 
         public override void Move()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Dragon is moving");
         }
     }
 }

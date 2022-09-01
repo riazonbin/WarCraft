@@ -9,6 +9,11 @@ namespace Units
     public abstract class Movable : Unit
     {
         private int _speed;
+        public Movable(int health)
+        {
+            this.SetHealth(health);
+            this.SetMaxHealth(health);
+        }
         public abstract void Move();
     }
 }
