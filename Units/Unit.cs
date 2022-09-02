@@ -12,7 +12,7 @@ namespace Units
         private string _name;
         private int _cost;
         private int _lvl;
-        private bool _isDestroyed;
+        private bool _isAlive;
         private int _maxhealth;
 
         public int GetHealth()
@@ -25,11 +25,11 @@ namespace Units
         }
         public bool GetStateOfLife()
         {
-            return _isDestroyed;
+            return _isAlive;
         }
         public bool SetStateOfLife(bool newState)
         {
-            return _isDestroyed = newState;
+            return _isAlive = newState;
         }
         public int SetMaxHealth(int health)
         {

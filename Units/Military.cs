@@ -20,6 +20,7 @@ namespace Units
         }
         public void Attack(Unit unit)
         {
+
             unit.SetHealth(unit.GetHealth() - this.GetDamage());
 
             if (unit.GetHealth() <= 0)
