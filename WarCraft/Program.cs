@@ -3,8 +3,8 @@ using Units;
 
 
 
-Mage playerOne = new();
-Footman playerTwo = new();
+Mage playerOne = new(80, 0, 10, 15, 100, 4);
+Footman playerTwo = new(100, 40, 4, 8);
 
 try
 {
