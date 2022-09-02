@@ -8,18 +8,36 @@ namespace Units
 {
     public abstract class Military : Movable
     {
-        private int _damage;
+        private double _damage;
+        private double _maxDamage;
         private int _attackSpeed;
-        private int _armor;
+        private int _maxAttackSpeed;
+        private double _armor;
+        private int _stunCounter = 0;
+        
 
-        public Military(int health, int armor, int attackSpeed, int damage) : base(health)
+        public Military(double health, double armor, int attackSpeed, double damage) 
+            : base(health)
         {
             this._armor = armor;
             this._attackSpeed = attackSpeed;
+            this._maxAttackSpeed = attackSpeed;
             this._damage = damage;
+            this._maxDamage = damage;
         }
-        public void Attack(Unit unit)
+        public virtual void Attack(Unit unit)
         {
+            if(_attackSpeed == 0)
+            {
+                _stunCounter++;
+                return;
+            }
+
+            if(_stunCounter > 1)
+            {
+                _stunCounter = 0;
+                _attackSpeed = _maxAttackSpeed;
+            }
 
             unit.SetHealth(unit.GetHealth() - this.GetDamage());
 
@@ -30,9 +48,19 @@ namespace Units
             }
         }
 
-        public int GetDamage()
+        public double GetDamage()
         {
             return _damage;
+        }
+
+        public void SetDamage(double damage)
+        {
+            _damage = damage;
+        }
+
+        public double GetMaxDamage()
+        {
+            return _maxDamage;
         }
 
         public int GetAttackSpeed()
@@ -40,11 +68,20 @@ namespace Units
             return _attackSpeed;
         }
 
+        public int GetMaxAttackSpeed()
+        {
+            return _maxAttackSpeed;
+        }
+
         public int SetAttackSpeed(int newAttackSpeed)
         {
             return _attackSpeed = newAttackSpeed;
         }
 
-
+        public int GetRandom()
+        {
+            Random rand = new Random();
+            return rand.Next(1, 11);
+        }
     }
 }

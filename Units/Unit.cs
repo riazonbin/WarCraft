@@ -8,32 +8,48 @@ namespace Units
 {
     public abstract class Unit
     {
-        private int _health;
-        private string _name;
-        private int _cost;
+        private double _health;
+        private string? _name;
+        private double _cost;
         private int _lvl;
         private bool _isAlive;
-        private int _maxhealth;
+        private double _maxhealth;
 
-        public int GetHealth()
+        public Unit(double health)
+        {
+            this.SetStateOfLife(true);
+            this.SetHealth(health);
+            this.SetMaxHealth(health);
+        }
+
+        public double GetHealth()
         {
             return _health;
         }
-        public int SetHealth(int newHealth)
+
+        public double SetHealth(double newHealth)
         {
             return _health = newHealth;
         }
+
         public bool GetStateOfLife()
         {
             return _isAlive;
         }
+
         public bool SetStateOfLife(bool newState)
         {
             return _isAlive = newState;
         }
-        public int SetMaxHealth(int health)
+
+        public double SetMaxHealth(double health)
         {
             return _maxhealth = health;
+        }
+
+        public double GetMaxHealth()
+        {
+            return _maxhealth;
         }
     }
 }

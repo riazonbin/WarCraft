@@ -10,7 +10,6 @@ namespace Units
     {
         public Peasant(int health) : base(health)
         {
-            this.SetStateOfLife(true);
         }
         public void Mining()
         {

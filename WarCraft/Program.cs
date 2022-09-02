@@ -1,9 +1,10 @@
 ﻿using System.Threading;
 using Units;
 
+
+
 Mage playerOne = new();
 Footman playerTwo = new();
-
 
 try
 {
@@ -13,8 +14,9 @@ try
         playerTwo.Attack(playerOne);
     }
 }
-catch
+catch(Exception ex)
 {
+    Console.WriteLine(ex.Message);
     Console.WriteLine(playerOne.GetStateOfLife() 
         ? $"First player ({playerOne.GetType().Name}) is victorious!" 
         : $"Second player({playerOne.GetType().Name}) is victorious!");

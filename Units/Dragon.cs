@@ -8,24 +8,17 @@ namespace Units
 {
     public class Dragon : Range
     {
-        public Dragon() : base(100, 100, 4, 25, 100, 20)
+        public Dragon(double health, double armor, int attackSpeed, double range, double mana, double damage)
+            : base(health, armor, attackSpeed, range, mana, damage)
         {
-            this.SetStateOfLife(true);
         }
 
         public void FireBreath(Unit unit)
         {
-            if (!unit.GetStateOfLife())
-            {
-                throw new Exception("Enemy is destroyed!");
-            }
-
-            unit.SetHealth(unit.GetHealth() - 25);
-
-            if (unit.GetHealth() <= 0)
-            {
-                unit.SetStateOfLife(false);
-            }
+            this.SetMana(GetMana() - 25);
+            SetDamage(40);
+            Attack(unit);
+            SetDamage(GetMaxDamage());
         }
 
         public override void Move()
