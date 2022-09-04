@@ -37,7 +37,10 @@ namespace Units
 
             this.SetMana(GetMana() - 20);
             unit.SetHealth(unit.GetHealth() + 15);
-            
+            if (unit.GetHealth() > unit.GetMaxHealth())
+            {
+                unit.SetHealth(GetMaxHealth());
+            }
         }
 
 
