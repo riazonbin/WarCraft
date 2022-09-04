@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Units;
+﻿using Units;
 
 
 
@@ -11,6 +10,7 @@ try
     while (true)
     {
         playerOne.Attack(playerTwo);
+        playerOne.FireBall(playerTwo);
         playerTwo.Attack(playerOne);
     }
 }
@@ -19,5 +19,5 @@ catch(Exception ex)
     Console.WriteLine(ex.Message);
     Console.WriteLine(playerOne.GetStateOfLife() 
         ? $"First player ({playerOne.GetType().Name}) is victorious!" 
-        : $"Second player({playerOne.GetType().Name}) is victorious!");
+        : $"Second player({playerTwo.GetType().Name}) is victorious!");
 }
