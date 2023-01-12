@@ -34,7 +34,6 @@ namespace Units.BaseUnits
             }
         }
 
-
         public Military(double health, double armor, int attackSpeed, double damage, string name)
             : base(health, name)
         {
@@ -54,7 +53,7 @@ namespace Units.BaseUnits
                 return;
             }
 
-            if (_stunCounter > 1)
+            if (_stunCounter > 0)
             {
                 _stunCounter = 0;
                 _attackSpeed = _maxAttackSpeed;

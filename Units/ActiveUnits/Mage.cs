@@ -34,9 +34,8 @@ namespace Units.ActiveUnits
 
             this.SetMana(GetMana() - 35);
             SetDamage(9);
-            Attack(unit);
+            base.Attack(unit);
             SetDamage(GetMaxDamage());
-            Console.WriteLine($"Mage {this.Name} fireballed {unit.Name}");
         }
 
         public void Blizzard(Unit unit)
@@ -51,7 +50,6 @@ namespace Units.ActiveUnits
             ((Military)unit).SetAttackSpeed(0);
             Attack(unit);
             SetDamage(GetMaxDamage());
-            Console.WriteLine($"Mage {this.Name} blizzarded {unit.Name}");
         }
 
         public void Heal(Unit unit)
@@ -93,7 +91,7 @@ namespace Units.ActiveUnits
                 FireBall(unit);
                 return;
             }
-            if (random.Next(5) == 1)
+            if (random.Next(5) == 1 && this.Health < this.GetMaxHealth())
             {
                 Heal(this);
                 return;
