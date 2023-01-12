@@ -1,23 +1,65 @@
-﻿using Units;
+﻿using Units.ActiveUnits;
+using Units.BaseUnits;
+
+Footman f1 = new(80, 100, 10, 15, "Alexander");
+Peasant p1 = new(100, "Bulat");
+Mage m1 = new(80, 100, 17, 100, 500, 4, "Mage");
+Mage m2 = new(80, 100, 10, 100, 100, 4, "UltraMaga");
+Footman f2 = new(80, 100, 10, 15, "Magomed");
+
+Blacksmith blacksmith = new(1000, "Blacksmith");
+List<Unit> units = new List<Unit>() { f1, p1};
+blacksmith.UpgradeWeapon(units);
+
+Random rand = new Random();
+
+
+Fight(f1, m1);
 
 
 
-Dragon playerOne = new(80, 0, 10, 15, 100, 4);
-Footman playerTwo = new(100, 40, 4, 8);
-
-try
+void Fight(Unit unit1 ,Unit unit2)
 {
-    while (true)
+    Task.Run(() =>
     {
-        playerOne.Attack(playerTwo);
-        playerOne.FireBall(playerTwo);
-        playerTwo.Attack(playerOne);
+        try
+        {
+            while(unit1.GetStateOfLife() && unit2.GetStateOfLife())
+            {
+                unit1.Attack(unit2);
+                Thread.Sleep(((Military)unit1).GetAttackSpeed() * 100);
+            }
+        }
+        catch { }
+    });
+
+    Task.Run(() =>
+    {
+        try
+        {
+            while (unit2.GetStateOfLife() && unit1.GetStateOfLife())
+            {
+                unit2.Attack(unit1);
+                Thread.Sleep(((Military)unit2).GetAttackSpeed() * 100);
+            }
+        }
+        catch { }
+    });
+
+    while(unit1.GetStateOfLife() && unit2.GetStateOfLife())
+    {
+        Thread.Sleep(1000);
     }
-}
-catch(Exception ex)
-{
-    Console.WriteLine(ex.Message);
-    Console.WriteLine(playerOne.GetStateOfLife() 
-        ? $"First player ({playerOne.GetType().Name}) is victorious!" 
-        : $"Second player({playerTwo.GetType().Name}) is victorious!");
+    if(unit1.GetStateOfLife() && !unit2.GetStateOfLife())
+    {
+        Console.WriteLine($"Игрок {unit1.Name} победил!");
+    }
+    else if (unit2.GetStateOfLife() && !unit1.GetStateOfLife())
+    {
+        Console.WriteLine($"Игрок {unit2.Name} победил!");
+    }
+    else if (!unit2.GetStateOfLife() && !unit1.GetStateOfLife())
+    {
+        Console.WriteLine("Ничья!");
+    }
 }
