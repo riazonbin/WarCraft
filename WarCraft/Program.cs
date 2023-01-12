@@ -20,7 +20,7 @@ void Fight(Unit unit1 ,Unit unit2)
 {
     List<Unit> units = new List<Unit>(){ unit1, unit2 };
 
-    Task.Run(() =>
+    var task1 = Task.Run(() =>
     {
         try
         {
@@ -38,7 +38,7 @@ void Fight(Unit unit1 ,Unit unit2)
         catch { }
     });
 
-    Task.Run(() =>
+    var task2 = Task.Run(() =>
     {
         try
         {
@@ -56,10 +56,6 @@ void Fight(Unit unit1 ,Unit unit2)
         catch { }
     });
 
-    while(units.Count == 2)
-    {
-        Thread.Sleep(1000);
-    }
 
     if(units.Count == 1)
     {
@@ -69,4 +65,5 @@ void Fight(Unit unit1 ,Unit unit2)
     {
         Console.WriteLine("Ничья!");
     }
+    Task.WaitAll(task1, task2);
 }
