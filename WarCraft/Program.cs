@@ -41,8 +41,13 @@ static void UnitAttack(Unit attacker, Unit defender, List<Unit> units)
     {
         while (units.Count == 2)
         {
+            if (!attacker.GetStateOfLife())
+            {
+                break;
+            }
+
             attacker.Attack(defender);
-            Thread.Sleep(((Military)attacker).GetAttackSpeed() * 10);
+            Thread.Sleep(100 - ((Military)attacker).GetAttackSpeed());
 
             if (!defender.GetStateOfLife())
             {
